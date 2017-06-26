@@ -89,7 +89,7 @@ def _get_call_lea_args(function, call_instr, *regs):
 def _prepare_guid(op, prefix):
     if op.type == o_mem:
         guid_ptr = Pointer(op.value)
-        if guid_ptr.type != GUID.IDA_TYPE:
+        if guid_ptr.type != "EFI_GUID":
             guid_data1 = str("%.8x" % Dword(op.value)).upper()
             guid_ptr.name = "%s_PROTOCOL_%s_GUID" % (prefix, guid_data1)
     else:
