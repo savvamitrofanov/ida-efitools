@@ -152,7 +152,7 @@ class _OperandType:
     def __cmp__(self, other):
         if isinstance(other, _OperandType):
             return cmp(self.__op_type, other.__op_type)
-        elif type(other) is int:
+        elif type(other) is int or long:
             return cmp(self.__op_type, other)
         raise NotImplementedError
 
