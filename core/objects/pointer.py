@@ -49,7 +49,8 @@ class Pointer(object):
         else:
             Pointer.USED_NAMES.update({value: 0})
         if MakeNameEx(self.__ea, value, SN_PUBLIC) != 1:
-            raise Exception("MakeName(0x%X, '%s') has failed" % (self.__ea, value))
+            raise Exception("MakeName(0x%X, '%s') has failed" %
+                            (self.__ea, value))
 
     @property
     def type(self):

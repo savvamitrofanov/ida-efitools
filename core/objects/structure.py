@@ -98,7 +98,8 @@ class Structure:
         flag = {1: FF_BYTE, 2: FF_WORD, 4: FF_DWRD, 8: FF_QWRD}.get(size)
         if flag is None:
             raise ValueError("size")
-        err_code = AddStrucMember(self._sid, name, offset, flag | FF_DATA, -1, size)
+        err_code = AddStrucMember(
+            self._sid, name, offset, flag | FF_DATA, -1, size)
         if err_code != 0:
             raise Exception("err_code = %d" % err_code)
 

@@ -13,7 +13,8 @@ class Function:
     def __init__(self, ea):
         self.__start = FirstFuncFchunk(ea)
         if self.__start == BADADDR:
-            raise ValueError("Can't get the first function chunk of the specified function")
+            raise ValueError(
+                "Can't get the first function chunk of the specified function")
 
     def __str__(self):
         return self.name
@@ -44,7 +45,8 @@ class Function:
         return GetFunctionName(self.__start)
 
     def args(self):
-        lvar_size = GetFrameLvarSize(self.__start) - 8  # exclude return address
+        lvar_size = GetFrameLvarSize(
+            self.__start) - 8  # exclude return address
         return iter(takewhile(lambda x: x.offset < lvar_size, self.frame))
 
     def lvars(self):

@@ -12,6 +12,7 @@ PTR_SIZE_BITS = {
     "byte ptr": 8,
 }
 
+
 def filter_objects(objects_list, **attrs):
     for object in objects_list:
         for attr_name, attr_value in attrs.items():
@@ -80,4 +81,3 @@ def strip_end(text, suffix):
     if suffix == "" or not text.endswith(suffix):
         return text
     return text[:-len(suffix)]
-

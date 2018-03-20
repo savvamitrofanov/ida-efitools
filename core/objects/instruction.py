@@ -7,7 +7,7 @@ from .register import Register
 
 
 class Instruction:
-    
+
     def __init__(self, ea):
         self.__ea = ea
 

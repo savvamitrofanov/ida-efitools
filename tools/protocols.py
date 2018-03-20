@@ -47,7 +47,8 @@ def _process_single_call(function, call_instr, guid_reg,
     if reg_args[interface_reg] is None:
         print "No interface argument found: %s" % call_instr
 
-    guid = _prepare_guid(reg_args[guid_reg], project.export_protocol_name_prefix)
+    guid = _prepare_guid(reg_args[guid_reg],
+                         project.export_protocol_name_prefix)
     if guid is None:
         return
 
@@ -62,7 +63,8 @@ def _process_single_call(function, call_instr, guid_reg,
 
     protocol = project.protocols.find(guid)
     if protocol is None:
-       project.protocols.register(guid, struc, interface, call_instr.ea, protocol_type)
+        project.protocols.register(
+            guid, struc, interface, call_instr.ea, protocol_type)
 
     return protocol
 
@@ -93,7 +95,8 @@ def _prepare_guid(op, prefix):
             guid_data1 = str("%.8x" % Dword(op.value)).upper()
             guid_ptr.name = "%s_PROTOCOL_%s_GUID" % (prefix, guid_data1)
     else:
-        print "Do not know how to extract GUID ptr from %s at 0x%X" % (op, op.ea)
+        print "Do not know how to extract GUID ptr from %s at 0x%X" % (
+            op, op.ea)
         return
 
     return GUID(ptr=guid_ptr)
@@ -121,11 +124,13 @@ def _prepare_interface(op, struc_name, function, bind_point):
                 lvar.name = underscore_to_global(struc_name).lstrip('g')
                 return Interface(lvar, bind_point)
             else:
-                print "Lvar %s not found in function %s frame" % (lvar_name, function)
+                print "Lvar %s not found in function %s frame" % (
+                    lvar_name, function)
         else:
             print "Can not extract lvar name from %s at 0x%X" % (op, op.ea)
     else:
-        print "Do not know how to extract interface from %s at 0x%X" % (op, op.ea)
+        print "Do not know how to extract interface from %s at 0x%X" % (
+            op, op.ea)
 
 
 _PROTOCOL_IMPORT_EXPORT_HANDLERS = {

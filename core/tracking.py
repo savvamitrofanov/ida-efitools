@@ -85,7 +85,8 @@ def _do_track(start, track, types_to_track, skip_functions, **kwargs):
                 if item[0].reg in rsp:
                     lvar = find_object(function.frame, name=item[0].displ_str)
                     if lvar is not None:
-                        _update_track(track, lvar, ImmediateValue(item[1].value))
+                        _update_track(
+                            track, lvar, ImmediateValue(item[1].value))
 
         elif item.mnem == 'lea':
 
@@ -128,7 +129,8 @@ def _do_track(start, track, types_to_track, skip_functions, **kwargs):
                     _update_track(track, item[0].reg, 0)
                 elif item[0].type in [o_displ, o_phrase]:
                     if item[0].reg in rsp:
-                        lvar = find_object(function.frame, name=item[0].displ_str)
+                        lvar = find_object(
+                            function.frame, name=item[0].displ_str)
                         if lvar is not None:
                             _update_track(track, lvar, ImmediateValue(0))
 

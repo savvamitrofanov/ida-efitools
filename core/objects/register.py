@@ -44,7 +44,8 @@ REG_GROUPS = (
 )
 
 REG_VOLATILE = ("rax", "rcx", "rdx", "r8", "r9", "r10", "r11")
-REG_NONVOLATILE = ("rbx", "rsi", "rdi", "rbp", "rsp", "r12", "r13", "r14", "r15")
+REG_NONVOLATILE = ("rbx", "rsi", "rdi", "rbp",
+                   "rsp", "r12", "r13", "r14", "r15")
 
 
 class Register:

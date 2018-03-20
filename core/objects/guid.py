@@ -7,6 +7,7 @@ from idc import MakeUnknown, DOUNK_SIMPLE
 
 GUID_TYPENAME = "EFI_GUID"
 
+
 class GUID:
 
     def __init__(self, addr=None, name=None, ptr=None):

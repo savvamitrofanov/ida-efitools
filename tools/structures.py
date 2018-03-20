@@ -103,7 +103,7 @@ def _update_structs_from_track(track):
 def _guess_struct_field(item, op, struc):
     if op.displ_str is not None and not struc.dummy:
         return
-    
+
     # if op.index_reg is not None:
     #     raise Exception("Look at this: 0x%X" % op.ea)
 
@@ -134,4 +134,3 @@ def _guess_struct_field(item, op, struc):
         member_name = "Field_%X" % op.displ
 
     struc.add_member(op.displ, member_name, member_size)
-
