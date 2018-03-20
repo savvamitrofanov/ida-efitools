@@ -1,4 +1,6 @@
-from idc import *
+import idc
+import ida_typeinf
+import os.path
 
 # from core.logger import logger
 from core.objects import GUID, Structure, Pointer, ImportProtocol, ExportProtocol
@@ -28,7 +30,8 @@ class ProtocolsList:
 
     def register(self, guid, struc, interface_ptr, introduced_at, type):
         if self.is_registered(guid):
-            raise Exception("Attempt to register alredy registered protocol: %s" % struc.name)
+            raise Exception(
+                "Attempt to register alredy registered protocol: %s" % struc.name)
         if type == IMPORT_PROTOCOL:
             protocol_class = ImportProtocol
         elif type == EXPORT_PROTOCOL:
@@ -47,17 +50,19 @@ autogen_struct_prefix = "UNKNOWN"
 
 
 def load_til(path_to_til):
-    if LoadTil(path_to_til) != 1:
-       raise Exception("LoadTil('%s') has failed" % (path_to_til))
+    if not ida_typeinf.load_til(path_to_til, os.path.dirname(path_to_til)):
+        raise Exception("load_til('%s') has failed" % (path_to_til))
 
     # Fix UINTN to be the actual word size if we can determine it
-    Til2Idb(-1, "UINTN")
-    entry = GetEntryPoint(GetEntryOrdinal(0))
-    if entry != BADADDR:
-        typedef = "typedef UINT" + str(16 << GetSegmentAttr(entry, SEGATTR_BITNESS)) + " UINTN;"
-        for i in xrange(0, GetMaxLocalType()):
-            if GetLocalTypeName(i) == "UINTN":
-                SetLocalType(SetLocalType(i, "", 0), typedef, 0)
+    idc.Til2Idb(-1, "UINTN")
+    entry = idc.GetEntryPoint(idc.GetEntryOrdinal(0))
+    if entry != idc.BADADDR:
+        typedef = "typedef UINT" + \
+            str(16 << idc.GetSegmentAttr(entry, idc.SEGATTR_BITNESS)) + " UINTN;"
+        for i in xrange(0, idc.GetMaxLocalType()):
+            if idc.GetLocalTypeName(i) == "UINTN":
+                idc.SetLocalType(idc.SetLocalType(i, "", 0), typedef, 0)
+
 
 def load_project(path):
     pass
